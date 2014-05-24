@@ -49,7 +49,7 @@ fulldata <- rbind(train,test)
 #Renaming variable names to a more user-friendly one
 features$description <- gsub("[t](bodygyro|bodybodygyro)","time.body.gyroscope.",features$V2,ignore.case=TRUE)
 features$description <- gsub("[t](bodyacc|bodybodyacc)","time.body.accelerometer.",features$description,ignore.case=TRUE)
-features$description <- gsub("[f](bodygyro|bodybodygyro)","fourier.body.gyroscope.",features$description,ignore.case=TRUE)
+features$description <- gsub("[f](bodygyro|bodybodygyro)","fourier.body.gyroscope.",features$descriptio,ignore.case=TRUE)
 features$description <- gsub("[f](bodyacc|bodybodyacc)","fourier.body.accelerometer.",features$description,ignore.case=TRUE)
 features$description <- gsub("tgravaccmag","time.gravity.accelerometer.magnitude",features$description,ignore.case=TRUE)
 features$description <- gsub("tgravityacc","time.gravity.accelerometer",features$description,ignore.case=TRUE)
@@ -64,5 +64,5 @@ mean.std <- cbind(fulldata[,c(1,2)],fulldata[,grep("mean|std",features$descripti
 
 
 #Create a tidy dataset that presents the average value of variables for each activity and subject
-meltdata <- melt(fulldata,id.vars=c("subject","activity"))
+meltdata <- melt(mean.std,id.vars=c("subject","activity"))
 avgdata <- dcast(meltdata,subject+activity~variable,mean)
